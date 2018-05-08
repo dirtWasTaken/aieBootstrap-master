@@ -8,7 +8,7 @@
 #include <list>
 
 /***********************************************************************************************
-an added vector used through the project to contain the number of sprites used.
+an added vector used throughout the project to contain the number of sprites used and their positions.
 ***********************************************************************************************/
 using TargetArray = std::vector<Target>;
 

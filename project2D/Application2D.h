@@ -3,6 +3,10 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
+/*
+The struct for our target vector and the position definitions, better than a for loop/array 
+*/
+
 struct Target
 {
 	Target()
