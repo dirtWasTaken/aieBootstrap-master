@@ -7,6 +7,9 @@
 #include <vector>
 #include <list>
 
+/***********************************************************************************************
+an added vector used through the project to contain the number of sprites used.
+***********************************************************************************************/
 using TargetArray = std::vector<Target>;
 
 TargetArray g_targets;
@@ -23,7 +26,7 @@ Application2D::~Application2D() {
 
 bool Application2D::startup() {
 
-	//randomisation of sprite locations
+	//seeding for the randomisation of sprite locations
 	srand(unsigned(time(NULL)));
 
 	m_2dRenderer = new aie::Renderer2D();
@@ -37,7 +40,9 @@ bool Application2D::startup() {
 	m_cameraY = 0;
 	m_timer = 0;
 
-	// Start off with x targets
+	/***********************************************************************************************
+	Start off with x targets using the global tagets variable referencing the target vector(set to 30)
+	***********************************************************************************************/
 	g_targets.resize(30);
 
 
@@ -52,6 +57,10 @@ void Application2D::shutdown() {
 	delete m_2dRenderer;
 }
 
+/***********************************************************************************************
+Update function used every frame through the delta time game loop
+to update our game state include input and randomisation of the spites 
+***********************************************************************************************/
 void Application2D::update(float deltaTime) {
 
 	m_timer += deltaTime;
@@ -64,11 +73,20 @@ void Application2D::update(float deltaTime) {
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 
-	if (input->isKeyDown(aie::INPUT_MOUSE_BUTTON_RIGHT))
-	{
-		g_targets.resize(30);
-	}
+	/***********************************************************************************************
+	Attempted to add a restart will try to fix it if I have time.
+	***********************************************************************************************/
+
+	//if (input->isKeyDown(aie::INPUT_MOUSE_BUTTON_RIGHT))
+	//{
+	//	g_targets.resize(30);
+	//}
 	
+	/***********************************************************************************************
+	Input and detection for the left mouse button responsible
+	for clicking on and deleting sprites 
+	***********************************************************************************************/
+
 	if (input->wasMouseButtonPressed(aie::INPUT_MOUSE_BUTTON_LEFT))
 	{
 		float xMouse = (float)input->getMouseX();
@@ -78,7 +96,9 @@ void Application2D::update(float deltaTime) {
 		for (size_t i = 0; i < g_targets.size(); i++)
 		{
 			Target & target = g_targets[i];
-
+			/*
+			using pythagoras theorem to crudely determine the hitbox of our tagets  
+			*/
 			float distance = sqrtf(    (xMouse - target.x) * (xMouse - target.x)  + (yMouse - target.y) * (yMouse - target.y)  );
 			if (distance < 40)
 			{
@@ -94,7 +114,9 @@ void Application2D::update(float deltaTime) {
 		}
 
 	}
-
+	/*
+	every 2 seconds randomise our targets locations through our for loop (Loop within a loop)
+	*/
 	if (m_timer > 2.0f)
 	{
 		for (size_t i = 0; i < g_targets.size(); i++)
@@ -142,6 +164,10 @@ void Application2D::draw() {
 	m_2dRenderer->drawSprite(nullptr, clickableBox->spriteLocationY[i], clickableBox->spriteLocationX[i], 50, 50, 3.14159f * 0.25f, 1);
 	}
 **********************/
+
+	/*
+	and then draw the boxes in our predetermined randomised positions 
+	*/
 	for (size_t i = 0; i < g_targets.size(); i++)
 	{
 		Target & target = g_targets[i];
