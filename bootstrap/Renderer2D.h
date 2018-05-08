@@ -16,6 +16,16 @@ public:
 	virtual void begin();
 	virtual void end();
 
+	//the struct with arrays used for randomised X, Y co-ordinates and the constant value used for the number of sprites
+/*******************
+	struct clickableBox
+	{
+		const int spriteNUM = 4;
+		float spriteLocationY[4];
+		float spriteLocationX[4];
+	};
+*******************/
+
 	// simple shape rendering
 	virtual void drawBox(float xPos, float yPos, float width, float height, float rotation = 0.0f, float depth = 0.0f);
 	virtual void drawCircle(float xPos, float yPos, float radius, float depth = 0.0f);

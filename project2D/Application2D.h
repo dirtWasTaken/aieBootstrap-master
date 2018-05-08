@@ -3,6 +3,23 @@
 #include "Application.h"
 #include "Renderer2D.h"
 
+struct Target
+{
+	Target()
+	{
+		x = y = 0;
+	}
+
+	Target(float x_, float y_)
+	{
+		x = x_;
+		y = y_;
+	}
+
+	float x = 0;
+	float y = 0;
+};
+
 class Application2D : public aie::Application {
 public:
 
